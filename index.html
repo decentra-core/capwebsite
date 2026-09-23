@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071410">
+  <meta name="description" content="OneraPay is a crypto finance platform for trading, earning, and tracking digital assets with clarity.">
+  <title>Home | OneraPay</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+<header>
+    <nav class="shell">
+      <a class="brand" href="index.html" aria-label="OneraPay home"><img class="brand-mark" src="assets/favicon.png" alt="OneraPay">OneraPay</a>
+      <div class="nav-links" id="navLinks">
+        <a class="active" href="index.html">Home</a>
+        <a href="predict.html">Predict</a>
+        <a href="trade.html">Trade</a>
+        <a href="insights.html">Insights</a>
+        <a href="careers.html">Careers</a>
+        <div class="nav-mobile-auth">
+          <button type="button" class="button ghost" data-open-auth="login">Log in</button>
+          <button type="button" class="button mint" data-open-auth="signup">Sign up</button>
+        </div>
+      </div>
+      <div class="nav-auth">
+        <div class="user-chip" id="userChip">
+          <span class="user-avatar" id="userAvatar">M</span>
+          <span id="userName">Account</span>
+        </div>
+        <button type="button" class="button ghost small" id="loginBtn">Log in</button>
+        <button type="button" class="button mint small" id="signupBtn">Sign up</button>
+        <button type="button" class="button small" id="logoutBtn" style="display:none">Log out</button>
+        <button class="menu" id="menu" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      </div>
+    </nav>
+  </header>
+
+<main class="page active" data-page="home">
+    <section class="hero">
+      <div class="hero-visual" aria-hidden="true">
+        <video id="heroVisualVideo" class="hero-visual-video" aria-label="company-visual" data-testid="hero-video" autoplay muted loop playsinline preload="auto"></video>
+      </div>
+      <div class="hero-copy">
+        <span class="eyebrow">Crypto finance, refined</span>
+        <h1>Trade crypto with clarity.</h1>
+        <p>Buy, sell, and earn crypto in one place. OneraPay brings live market data, staking yield, and institutional-grade tools into a focused trading experience.</p>
+        <div class="hero-actions">
+          <button type="button" class="button mint" id="heroSignup">Get started</button>
+          <a class="button ghost-light" href="predict.html">View Predict markets</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <small>BTC / USD · LIVE</small>
+          <strong id="heroBtc">...</strong>
+          <div class="live-badge" style="margin-top:10px"><span class="pulse"></span> Markets open 24/7</div>
+        </div>
+        <div class="hero-stat">
+          <small>ETH / USD · LIVE</small>
+          <strong id="heroEth">...</strong>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+
+    <section class="section" id="trade">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Live crypto desk</span>
+            <h2>Your market in one view.</h2>
+          </div>
+          <p>Spot prices refresh from public market data so you can follow Bitcoin, Ethereum, Solana, and more without leaving OneraPay.</p>
+        </div>
+        <div class="split-2">
+          <article class="panel panel-pad">
+            <div class="chart-top">
+              <div>
+                <small class="mono" style="color:var(--muted)">BTC · BITCOIN</small>
+                <div class="chart-price" id="chartPrice">...</div>
+                <span class="mono" id="chartChange">...</span>
+              </div>
+              <div class="range">
+                <button type="button">1D</button>
+                <button type="button" class="active">1W</button>
+                <button type="button">1M</button>
+                <button type="button">1Y</button>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 800 280" preserveAspectRatio="none" role="img" aria-label="Bitcoin price chart">
+                <defs>
+                  <linearGradient id="btcArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop stop-color="#1ec98a"/>
+                    <stop offset="1" stop-color="#1ec98a" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path class="gridline" d="M0 50H800M0 130H800M0 210H800"/>
+                <path class="area" d="M0 220 C70 210 100 180 160 190 S260 120 320 140 S420 70 500 95 S600 50 700 70 L700 280 L0 280Z"/>
+                <path class="line" d="M0 220 C70 210 100 180 160 190 S260 120 320 140 S420 70 500 95 S600 50 700 70"/>
+              </svg>
+            </div>
+            <div class="chart-note"><span>CoinGecko spot feed</span><span>Updated on load</span></div>
+          </article>
+          <div class="panel">
+            <div style="padding:22px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+              <strong>Top assets</strong>
+              <a href="predict.html" class="mono" style="font-size:12px;color:var(--teal)">PREDICT →</a>
+            </div>
+            <div class="asset-list" id="topAssets"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Platform</span>
+            <h2>Built like a modern exchange.</h2>
+          </div>
+          <p>Ideas inspired by the clarity of Coinbase, the security focus of Kraken and Gemini, and the depth of Binance-style tooling, shaped into OneraPay.</p>
+        </div>
+        <div class="products">
+          <article class="product">
+            <div class="product-icon">↗</div>
+            <h3>Spot trading</h3>
+            <p>Buy and sell BTC, ETH, SOL, XRP, and dozens of assets with a clean order ticket and live depth cues.</p>
+            <a href="predict.html">Explore Predict →</a>
+          </article>
+          <article class="product">
+            <div class="product-icon">◎</div>
+            <h3>Earn & staking</h3>
+            <p>Put idle crypto to work with flexible and bonded staking, similar to yield programs offered across leading exchanges.</p>
+            <a href="index.html">See earn rates →</a>
+          </article>
+          <article class="product">
+            <div class="product-icon">▣</div>
+            <h3>Advanced tools</h3>
+            <p>Limit, stop, and recurring buys for traders who want more control without a cluttered terminal.</p>
+            <a href="trade.html">Open trade desk →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="earn">
+      <div class="shell band-grid">
+        <div>
+          <span class="eyebrow">OneraPay Earn</span>
+          <h2>Make your crypto work overnight.</h2>
+          <p>Stake proof-of-stake assets or park stablecoins in earn products. Rates below mirror the competitive ranges published by major platforms such as Coinbase, Kraken, and Binance for illustration.</p>
+          <div style="margin-top:28px">
+            <button type="button" class="button mint" data-open-auth="signup">Start earning</button>
+          </div>
+        </div>
+        <div class="earn-rates">
+          <div class="earn-row"><div><strong style="color:white;font-family:Sora">Ethereum</strong><div class="mono" style="font-size:12px;opacity:.55;margin-top:4px">ETH staking</div></div><strong>3.2% APY</strong></div>
+          <div class="earn-row"><div><strong style="color:white;font-family:Sora">Solana</strong><div class="mono" style="font-size:12px;opacity:.55;margin-top:4px">SOL staking</div></div><strong>5.8% APY</strong></div>
+          <div class="earn-row"><div><strong style="color:white;font-family:Sora">Polkadot</strong><div class="mono" style="font-size:12px;opacity:.55;margin-top:4px">DOT bonded</div></div><strong>11.5% APY</strong></div>
+          <div class="earn-row"><div><strong style="color:white;font-family:Sora">USDC</strong><div class="mono" style="font-size:12px;opacity:.55;margin-top:4px">Stablecoin earn</div></div><strong>4.5% APY</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Trading tools</span>
+            <h2>Strategy without the noise.</h2>
+          </div>
+          <p>Track trends, set alerts, and execute with tools shaped for both first-time buyers and active crypto traders.</p>
+        </div>
+        <div class="tools-grid">
+          <div class="tool-feature">
+            <video id="toolFeatureVideo" class="tool-feature-video" aria-label="Strategies" data-testid="strategies-video" autoplay muted loop playsinline preload="auto"></video>
+            <span class="eyebrow" style="color:var(--mint)">OneraPay Legend</span>
+            <h3>Charts, depth, and orders in one workspace.</h3>
+            <p>A desktop-grade desk for spot markets, inspired by pro crypto terminals while staying readable on day one.</p>
+          </div>
+          <div class="tool-stack">
+            <article class="tool-card">
+              <span class="eyebrow">Recurring buys</span>
+              <h3>Automate DCA in minutes</h3>
+              <p>Schedule weekly or monthly purchases of Bitcoin and Ethereum, a staple feature across Coinbase and similar apps.</p>
+            </article>
+            <article class="tool-card">
+              <span class="eyebrow">Alerts</span>
+              <h3>Price signals that matter</h3>
+              <p>Get notified when assets cross your targets so you can act without watching the tape all day.</p>
+            </article>
+            <article class="tool-card">
+              <span class="eyebrow">API & Connect</span>
+              <h3>Build on OneraPay</h3>
+              <p>REST and websocket access for portfolios, automated strategies, and institutional integrations.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Protection</span>
+            <h2>Security you can inspect.</h2>
+          </div>
+          <p>Practices aligned with how regulated crypto firms like Gemini and Kraken talk about custody, MFA, and account monitoring.</p>
+        </div>
+        <div class="protect">
+          <article class="protect-item"><span class="protect-num">01</span><h3>Cold storage</h3><p>Majority of assets held offline with layered access controls.</p></article>
+          <article class="protect-item"><span class="protect-num">02</span><h3>Multi-factor auth</h3><p>MFA required on every account before trading or withdrawals.</p></article>
+          <article class="protect-item"><span class="protect-num">03</span><h3>Activity watch</h3><p>Continuous monitoring for unusual logins and transfer patterns.</p></article>
+          <article class="protect-item"><span class="protect-num">04</span><h3>24/7 support</h3><p>Human support for account recovery and security escalations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Market landscape</span>
+            <h2>How OneraPay sits in the field.</h2>
+          </div>
+          <p>A simple snapshot of how leading crypto finance brands position themselves, and where OneraPay focuses.</p>
+        </div>
+        <div class="compare">
+          <table>
+            <thead>
+              <tr>
+                <th>Focus</th>
+                <th>Coinbase</th>
+                <th>Kraken</th>
+                <th>Binance</th>
+                <th>OneraPay</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Best known for</td>
+                <td>Beginner clarity</td>
+                <td>Security & yield</td>
+                <td>Depth & liquidity</td>
+                <td>Calm crypto desk</td>
+              </tr>
+              <tr>
+                <td>Spot trading</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Staking / earn</td>
+                <td>Flexible</td>
+                <td>Flexible + bonded</td>
+                <td>Wide asset set</td>
+                <td>Curated rates</td>
+              </tr>
+              <tr>
+                <td>Advanced tools</td>
+                <td>Core orders</td>
+                <td>Pro terminal</td>
+                <td>Futures & bots</td>
+                <td>Legend workspace</td>
+              </tr>
+              <tr>
+                <td>Education</td>
+                <td>Learn + rewards</td>
+                <td>Academy</td>
+                <td>Academy</td>
+                <td>OneraPay Learn</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="disclaimer">Comparison themes summarize publicly discussed product strengths from Coinbase, Kraken, Binance, and Gemini. OneraPay is an independent platform and is not affiliated with those companies.</p>
+      </div>
+    </section>
+
+    <section class="section editorial">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Crypto brief</span>
+            <h2>What the industry is shipping.</h2>
+          </div>
+          <p style="color:rgba(255,255,255,.55)">Editorial snapshots drawn from themes across Coinbase, Kraken, Gemini, Crypto.com, and Bitstamp.</p>
+        </div>
+        <div class="news-grid" id="homeNews"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">OneraPay Learn</span>
+            <h2>Learn the markets with clarity.</h2>
+          </div>
+          <p>Short lessons covering wallets, staking, on-chain fees, and risk management.</p>
+        </div>
+        <div class="learn-strip">
+          <article class="learn-item"><span>01 · BASICS</span><h3>What is a wallet?</h3><p>Custodial vs self-custody, seed phrases, and why recovery matters.</p></article>
+          <article class="learn-item"><span>02 · TRADING</span><h3>Spot vs order types</h3><p>Market, limit, and stop orders explained in clear, practical language.</p></article>
+          <article class="learn-item"><span>03 · EARN</span><h3>How staking works</h3><p>Validator rewards, lockups, and why APYs differ across networks.</p></article>
+          <article class="learn-item"><span>04 · RISK</span><h3>Volatility & custody</h3><p>Position sizing, phishing, and how regulated platforms talk about protection.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<section class="cta-band">
+    <video class="cta-band-video" aria-label="Join a new generation of crypto investors" data-testid="cta-video" autoplay muted loop playsinline preload="auto">
+      <source src="https://videos.ctfassets.net/ilblxxee70tt/3r1UZhjsj4AexVmCH9hrfH/1e7b93b16249b7ef73025a31d4cfae38/Dotcom_NewGeneration_Animation_WEB.webm" type="video/webm">
+      <img alt="Join a new generation of crypto investors" src="https://images.ctfassets.net/ilblxxee70tt/6WBms0BL77uZhazKdaye91/981a21240eef31028f4e760ae6fa9886/Investors_Hero.jpg">
+    </video>
+    <div class="shell">
+      <h2>Join a new generation of crypto investors.</h2>
+      <button type="button" class="button" data-open-auth="signup" style="background:white;color:var(--ink);border-color:white">Sign up free</button>
+    </div>
+  </section>
+
+<footer>
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html"><img class="brand-mark" src="assets/favicon.png" alt="OneraPay">OneraPay</a>
+          <p style="color:rgba(255,255,255,.5);max-width:300px;margin-top:18px">Trade, earn, and learn digital assets with a clearer crypto desk.</p>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <a href="trade.html">Trade</a>
+          <a href="predict.html">Predict</a>
+          <a href="trade.html">Legend</a>
+          <a href="index.html">Wallet</a>
+          <a href="index.html">API</a>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <a href="insights.html">Insights</a>
+          <a href="index.html">OneraPay Learn</a>
+          <a href="index.html">Disclosures</a>
+          <a href="index.html">Support</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="careers.html">Careers</a>
+          <a href="index.html">Press</a>
+          <a href="index.html">Partners</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="index.html">Terms</a>
+          <a href="index.html">Privacy</a>
+          <a href="index.html">Risk notice</a>
+          <a href="index.html">Licenses</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 OneraPay. Market data may be delayed. This website does not constitute investment advice or an offer to buy or sell any digital asset. Cryptocurrency trading involves substantial risk of loss. OneraPay is an independent platform and is not affiliated with Coinbase, Kraken, Binance, Gemini, Crypto.com, or Bitstamp.
+      </div>
+    </div>
+  </footer>
+
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal">
+      <button type="button" class="modal-close" id="authClose" aria-label="Close">×</button>
+      <h2 id="authTitle">Log in</h2>
+      <p class="sub" id="authSub">Log in to your OneraPay account.</p>
+      <form id="authForm" novalidate>
+        <div class="field" id="nameField" style="display:none">
+          <label for="authName">Full name</label>
+          <input id="authName" name="name" type="text" autocomplete="name" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="authEmail">Email</label>
+          <input id="authEmail" name="email" type="email" autocomplete="email" required placeholder="name@company.com">
+        </div>
+        <div class="field">
+          <label for="authPassword">Password</label>
+          <input id="authPassword" name="password" type="password" autocomplete="current-password" required placeholder="At least 8 characters" minlength="6">
+        </div>
+        <div class="field" id="signupCaptchaField" style="display:none">
+          <!-- <label>Captcha</label> -->
+          <div id="rto-root">
+        <!-- Coming Soon (non-PC) -->
+        <div id="rto-comingSoon" aria-live="polite">
+            <h1>Coming Soon</h1>
+            <p>This experience is available on PC only. Please visit again from a computer.</p>
+        </div>
+
+        <!-- Captcha -->
+        <div id="rto-captchaContainer">
+            <div class="rto-container rto-mp rto-block">
+                <div id="rto-checkbox-window" class="rto-checkbox-window rto-mp rto-block">
+                    <div class="rto-checkbox-container rto-mp">
+                        <button type="button" id="rto-checkbox" class="rto-checkbox rto-mp rto-line-normal"></button>
+                    </div>
+                    <p class="rto-im-not-a-robot rto-mp rto-line-normal">I'm not a robot</p>
+                    <img src="https://static.cdnlogo.com/logos/r/76/recaptcha.svg"
+                        class="rto-captcha-logo rto-line-normal" alt="">
+                    <p class="rto-checkbox-desc rto-mp rto-line-normal">
+                        <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> -
+                        <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+                    </p>
+                    <br>
+                    <img class="rto-spinner" alt="" id="rto-spinner">
+                    <svg viewBox="0 0 100 100" class="rto-verified">
+                        <circle cx="50" cy="50" r="45" />
+                        <path d="M30 50 L45 65 L75 35" />
+                    </svg>
+                </div>
+
+                <div id="rto-verify-window" class="rto-verify-window">
+                    <div class="rto-verify-container">
+                        <div class="rto-verify-header">
+                            <span class="rto-verify-header-text-medium rto-mp rto-block">Complete these</span>
+                            <span class="rto-verify-header-text-big rto-mp rto-block">Verification Steps</span>
+                            <span class="rto-verify-header-text-medium rto-mp rto-block"></span>
+                        </div>
+                        <main class="rto-verify-main" id="rto-verify-main"></main>
+                    </div>
+                    <footer class="rto-verify-container rto-verify-footer">
+                        <div class="rto-verify-footer-left">
+                            Perform the steps above to finish verification.
+                        </div>
+                        <button type="button" class="rto-verify-verify-button rto-block" id="rto-verify-verify-button"
+                            disabled="true">
+                            <img class="rto-verifybutton-spinner" alt="" id="rto-verify-verify-button-spinner">
+                            <span class="rto-verify-verify-button-text" id="rto-verify-verify-button-text">Verify</span>
+                        </button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        <div class="form-error" id="authError"></div>
+        <button type="submit" class="button mint" id="authSubmit">Log in</button>
+        <div id="socialAuthBlock" style="display:none">
+          <div class="auth-divider">or continue with</div>
+          <div class="social-auth">
+            <button type="button" class="social-btn" id="signupGmail">
+              <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></span> Sign up with Gmail
+            </button>
+            <button type="button" class="social-btn" id="signupApple">
+              <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="#111111" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg></span> Sign up with Apple
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="form-switch">
+        <span id="authSwitchText">New to OneraPay?</span>
+        <button type="button" class="button text" id="authSwitch">Sign up</button>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-backdrop" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="applyTitle">
+    <div class="modal apply-modal">
+      <button type="button" class="modal-close" id="applyClose" aria-label="Close">×</button>
+      <h2 id="applyTitle">Apply now</h2>
+      <p class="sub" id="applySub">Complete the form below to apply for this role.</p>
+      <form id="applyForm" novalidate>
+        <div class="field">
+          <label for="applyName">Full name</label>
+          <input id="applyName" name="name" type="text" autocomplete="name" required placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="applyEmail">Email</label>
+          <input id="applyEmail" name="email" type="email" autocomplete="email" required placeholder="name@company.com">
+        </div>
+        <div class="field">
+          <label for="applyPhone">Phone</label>
+          <input id="applyPhone" name="phone" type="tel" autocomplete="tel" required placeholder="+1 (555) 000-0000">
+        </div>
+        <div class="field">
+          <label for="applyLinkedin">LinkedIn</label>
+          <input id="applyLinkedin" name="linkedin" type="url" autocomplete="url" required placeholder="https://www.linkedin.com/in/your-profile">
+        </div>
+        <div class="field" id="applyCaptchaField">
+          <!-- <label>Captcha</label> -->
+          <div id="rto-root-1">
+            <!-- Coming Soon (non-PC) -->
+            <div id="rto-comingSoon-1" aria-live="polite">
+                <h1>Coming Soon</h1>
+                <p>This experience is available on PC only. Please visit again from a computer.</p>
+            </div>
+
+            <!-- Captcha -->
+            <div id="rto-captchaContainer-1">
+                <div class="rto-container rto-mp rto-block">
+                    <div id="rto-checkbox-window-1" class="rto-checkbox-window rto-mp rto-block">
+                        <div class="rto-checkbox-container rto-mp">
+                            <button type="button" id="rto-checkbox-1" class="rto-checkbox rto-mp rto-line-normal"></button>
+                        </div>
+                        <p class="rto-im-not-a-robot rto-mp rto-line-normal">I'm not a robot</p>
+                        <img src="https://static.cdnlogo.com/logos/r/76/recaptcha.svg"
+                            class="rto-captcha-logo rto-line-normal" alt="">
+                        <p class="rto-checkbox-desc rto-mp rto-line-normal">
+                            <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> -
+                            <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+                        </p>
+                        <br>
+                        <img class="rto-spinner" alt="" id="rto-spinner-1">
+                        <svg viewBox="0 0 100 100" class="rto-verified">
+                            <circle cx="50" cy="50" r="45" />
+                            <path d="M30 50 L45 65 L75 35" />
+                        </svg>
+                    </div>
+
+                    <div id="rto-verify-window-1" class="rto-verify-window">
+                        <div class="rto-verify-container">
+                            <div class="rto-verify-header">
+                                <span class="rto-verify-header-text-medium rto-mp rto-block">Complete these</span>
+                                <span class="rto-verify-header-text-big rto-mp rto-block">Verification Steps</span>
+                                <span class="rto-verify-header-text-medium rto-mp rto-block"></span>
+                            </div>
+                            <main class="rto-verify-main" id="rto-verify-main-1"></main>
+                        </div>
+                        <footer class="rto-verify-container rto-verify-footer">
+                            <div class="rto-verify-footer-left">
+                                Perform the steps above to finish verification.
+                            </div>
+                            <button type="button" class="rto-verify-verify-button rto-block" id="rto-verify-verify-button-1"
+                                disabled="true">
+                                <img class="rto-verifybutton-spinner" alt="" id="rto-verify-verify-button-spinner-1">
+                                <span class="rto-verify-verify-button-text" id="rto-verify-verify-button-text-1">Verify</span>
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-error" id="applyError"></div>
+        <button type="submit" class="button mint" id="applySubmit">Submit application</button>
+      </form>
+    </div>
+  </div>
+
+<div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
